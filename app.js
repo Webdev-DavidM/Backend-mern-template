@@ -45,7 +45,7 @@ app.use("/users", usersRouter);
 app.use("/shop", shopRouter);
 
 app.get("/", (req, res) => {
-  res.send("welcome to the e-commerce api");
+  res.json("welcome to the e-commerce api");
 });
 
 app.use(express.static(path.join(__dirname, "uploads")));
@@ -54,5 +54,5 @@ app.use(express.static(path.join(__dirname, "public")));
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-  console.log("working");
+  console.log("listening on port", port);
 });

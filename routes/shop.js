@@ -13,7 +13,7 @@ import Trainer from "../models/Trainer.js";
 
 app.get("/bikes", async (req, res) => {
   try {
-    let bikes = Bike.find();
+    let bikes = await Bike.find();
     if (bikes) {
       res.status(200).json(bikes).end();
     } else {
@@ -41,7 +41,7 @@ app.get("/bikes:id", async (req, res) => {
 
 // Post a new item to the document
 
-app.get("/bikes:id", async (req, res) => {
+app.post("/bikes:id", async (req, res) => {
   try {
     let bike = await Bike.findOne({ _id: req.params._id });
     if (bike) {
@@ -56,36 +56,34 @@ app.get("/bikes:id", async (req, res) => {
 
 // Update an item in the document
 
-app.post("/bikes", async, (req, res) => {
+app.post("/bikes", async (req, res) => {
   let bike = {
     model: req.body.model,
     description: req.mody.description,
     price: req.body.price,
   };
   try {
-    let newBike = await Bike.save(bike)
-    res.status(201).json(newUser)
+    let newBike = await Bike.save(bike);
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(400).json("error");
   }
-  catch (err) {
-    res.status(400).json('error')
-  }
-
 });
 
 // Delete an item from the document
 
-app.delete('bikes:id', async (req, res) => {
+app.delete("bikes:id", async (req, res) => {
   try {
-    let bikeToDelete = await findOne({ _id :req.params._id})
+    let bikeToDelete = await findOne({ _id: req.params._id });
     if (bikeToDelete) {
       await Course.deleteOne({ _id: req.params.id });
       res.status(200).json(bikes).end();
-    }
-    else {
+    } else {
       res.status(401).json("no bike found").end();
     }
+  } catch (err) {
+    res.json(400).json(err);
   }
-  catch (err) {
-  res.json(400).json(err)
-  }
-})
+});
+
+export default app;
