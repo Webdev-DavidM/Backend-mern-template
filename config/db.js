@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 let uri = process.env.mongoURI;
-console.log(uri);
 
 // adjust the data connection below as required.
 

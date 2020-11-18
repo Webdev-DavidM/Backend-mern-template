@@ -6,8 +6,6 @@ export const upload = multer({ dest: "uploads/" });
 
 // with es6 modules i haver to use the full filename with .js otherwise it wont find it unlike in react with babel.
 import Bike from "../models/Bike.js";
-import Clothe from "../models/Clothe.js";
-import Trainer from "../models/Trainer.js";
 
 // get all the items from the document
 
@@ -72,11 +70,11 @@ app.post("/bikes", async (req, res) => {
 
 // Delete an item from the document
 
-app.delete("bikes:id", async (req, res) => {
+app.delete("/bikes:id", async (req, res) => {
   try {
-    let bikeToDelete = await findOne({ _id: req.params._id });
+    let bikeToDelete = await Bike.findOne({ _id: req.params._id });
     if (bikeToDelete) {
-      await Course.deleteOne({ _id: req.params.id });
+      await Bike.deleteOne({ _id: req.params.id });
       res.status(200).json(bikes).end();
     } else {
       res.status(401).json("no bike found").end();

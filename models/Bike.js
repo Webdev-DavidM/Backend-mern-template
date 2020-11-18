@@ -1,15 +1,18 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const bikeSchema = new mongoose.Schema(
-  {
-    name: String,
-    price: Number,
-    description: String,
-    image: String,
+//please just the name of the model titles as required
+
+const bikeSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please provide a value for 'title'"],
   },
-  { useUnifiedTopology: true }
-);
+  price: {
+    type: Number,
+    required: [true, "Please provide a value for 'price'"],
+  },
+});
 
-const Bike = mongoose.model('Bike', bikeSchema);
+const Bike = mongoose.model("Bike", bikeSchema);
 
 export default Bike;
