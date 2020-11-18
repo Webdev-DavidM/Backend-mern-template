@@ -1,14 +1,19 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const usersSchema = new mongoose.Schema(
   {
-    email: String,
-    password: String,
-    name: String,
+    email: {
+      type: String,
+      required: [true, "Please provide a value for 'email'"],
+    },
+    password: {
+      type: String,
+      required: [true, "Please provide a value for 'password'"],
+    },
   },
   { useUnifiedTopology: true }
 );
 
-const User = mongoose.model('User', usersSchema);
+const User = mongoose.model("User", usersSchema);
 
 export default User;
